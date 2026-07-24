@@ -360,16 +360,16 @@
       background:repeating-linear-gradient(90deg,#fff 0 14px,#f0b765 14px 28px)
     }
     .village-npc{
-      position:absolute;z-index:5;bottom:18px;right:22px;font-size:42px;
+      position:absolute;z-index:5;top:110px;right:18px;font-size:42px;
       animation:npcBob 2.2s ease-in-out infinite
     }
     .npc-bubble{
-      position:absolute;z-index:5;right:66px;bottom:58px;max-width:205px;
+      position:absolute;z-index:5;right:70px;top:110px;max-width:180px;
       background:#fff;border-radius:16px;padding:9px 12px;font-size:13px;font-weight:800;
       box-shadow:0 5px 15px rgba(0,0,0,.1)
     }
     .npc-bubble:after{
-      content:"";position:absolute;right:-8px;bottom:10px;border-width:7px 0 7px 9px;
+      content:"";position:absolute;right:-8px;top:18px;border-width:7px 0 7px 9px;
       border-style:solid;border-color:transparent transparent transparent #fff
     }
     @keyframes npcBob{50%{transform:translateY(-5px)}}
@@ -410,11 +410,89 @@
       .village-grid{gap:8px;margin-top:70px}
       .building{transform:scale(.88)}
       .shop-label{margin-top:-4px}
-      .village-npc{right:14px;bottom:14px;font-size:38px}
+      .village-npc{top:100px;right:10px;font-size:34px}
       .npc-bubble{
-        right:54px;bottom:50px;max-width:145px;font-size:12px;
+        top:100px;right:46px;max-width:135px;font-size:11px;
         padding:8px 10px
       }
+    }
+
+
+    .mom-lock,.mom-dashboard{max-width:760px;margin:0 auto}
+    .mom-lock-card{
+      background:linear-gradient(145deg,#fff,#f7f0fb);border:1px solid var(--line);
+      border-radius:28px;padding:28px 22px;text-align:center;box-shadow:var(--shadow)
+    }
+    .mom-lock-icon{font-size:58px;margin-bottom:8px}
+    .mom-lock-card h2{margin:4px 0 8px;color:var(--purple)}
+    .mom-lock-card p{margin:0 auto 18px;max-width:430px;color:var(--muted);line-height:1.6}
+    .mom-password-row{display:flex;gap:10px;max-width:360px;margin:auto}
+    .mom-password-row input{flex:1;text-align:center;font-size:20px;letter-spacing:7px}
+    .mom-error{min-height:22px;color:var(--danger);font-size:14px;font-weight:800;margin-top:8px}
+
+    .mom-head{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      margin-bottom:16px
+    }
+    .mom-head h2{margin:0;color:var(--purple)}
+    .mom-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .mom-metrics{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px
+    }
+    .mom-metric{
+      background:#fff;border:1px solid var(--line);border-radius:18px;padding:15px;
+      text-align:center;box-shadow:0 6px 18px rgba(67,43,80,.06)
+    }
+    .mom-metric .emoji{font-size:25px}
+    .mom-metric strong{display:block;font-size:21px;color:var(--purple);margin-top:5px}
+    .mom-metric span{font-size:12px;color:var(--muted);font-weight:800}
+    .mom-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .mom-panel{
+      background:#fff;border:1px solid var(--line);border-radius:22px;padding:17px;
+      box-shadow:0 7px 20px rgba(67,43,80,.06)
+    }
+    .mom-panel.wide{grid-column:1/-1}
+    .mom-panel h3{margin:0 0 13px;color:var(--purple)}
+    .today-progress{
+      height:12px;background:#eee7f2;border-radius:999px;overflow:hidden;margin:10px 0 6px
+    }
+    .today-progress > div{height:100%;background:var(--purple);border-radius:inherit;transition:.3s}
+    .category-stat{margin:12px 0}
+    .category-stat-head{display:flex;justify-content:space-between;font-size:13px;font-weight:900}
+    .category-bar{height:9px;background:#eee7f2;border-radius:999px;overflow:hidden;margin-top:6px}
+    .category-bar div{height:100%;background:var(--purple);border-radius:inherit}
+    .mom-list{display:grid;gap:8px}
+    .mom-list-item{
+      display:flex;justify-content:space-between;align-items:center;gap:10px;
+      padding:10px 11px;border-radius:14px;background:#faf7fc;border:1px solid #eee6f2
+    }
+    .mom-list-main{min-width:0}
+    .mom-list-main strong{display:block}
+    .mom-list-main small{color:var(--muted)}
+    .empty-state{text-align:center;color:var(--muted);padding:20px 8px}
+    .point-control{display:grid;grid-template-columns:1fr 100px auto;gap:8px}
+    .point-control input{min-width:0}
+    .shop-admin-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+    .shop-admin-tab{
+      border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;
+      font-weight:900;color:var(--muted)
+    }
+    .shop-admin-tab.active{background:var(--purple);color:#fff;border-color:var(--purple)}
+    .shop-admin-item{
+      display:grid;grid-template-columns:62px 1fr 90px auto;gap:8px;align-items:center;
+      margin-bottom:9px;padding:10px;border:1px solid var(--line);border-radius:15px
+    }
+    .shop-admin-item input{min-width:0}
+    .mom-note{font-size:12px;color:var(--muted);line-height:1.5;margin-top:9px}
+    @media(max-width:650px){
+      .mom-metrics{grid-template-columns:repeat(2,1fr)}
+      .mom-grid{grid-template-columns:1fr}
+      .mom-panel.wide{grid-column:auto}
+      .mom-password-row{flex-direction:column}
+      .point-control{grid-template-columns:1fr 90px}
+      .point-control button{grid-column:1/-1}
+      .shop-admin-item{grid-template-columns:48px 1fr 76px}
+      .shop-admin-item .mini-del{grid-column:1/-1}
     }
 
     .toast{
@@ -593,15 +671,94 @@
       </div>
 
       <div class="village-note">
-        지금 버전은 마을과 상품을 구경하는 체험판이에요. 교환 기능은 테스트할 수 있도록 동작하지만,
-        실제 상품 관리와 교환내역 화면은 다음 단계에서 엄마모드에 연결할 수 있어요.
+        마을의 상품은 엄마모드에서 직접 추가·수정·삭제할 수 있어요.
+        교환한 상품과 사용 포인트도 엄마 대시보드에 자동으로 기록됩니다.
       </div>
     </section>
 
-    <nav class="bottom-nav" style="grid-template-columns:repeat(3,1fr)">
+
+    <section id="momView" class="view">
+      <div id="momLock" class="mom-lock">
+        <div class="mom-lock-card">
+          <div class="mom-lock-icon">👩‍🌾</div>
+          <h2>엄마모드</h2>
+          <p>루틴과 포도마을 상점, 포인트와 교환내역을 엄마가 관리하는 공간이에요.</p>
+          <div class="mom-password-row">
+            <input id="momPassword" type="password" inputmode="numeric" maxlength="4"
+                   placeholder="비밀번호 4자리" autocomplete="off">
+            <button type="button" class="btn btn-primary" id="unlockMom">입장하기</button>
+          </div>
+          <div id="momPasswordError" class="mom-error"></div>
+          <div class="mom-note">초기 비밀번호는 1234입니다.</div>
+        </div>
+      </div>
+
+      <div id="momDashboard" class="mom-dashboard" hidden>
+        <div class="mom-head">
+          <div>
+            <h2>👩 엄마 대시보드</h2>
+            <div style="color:var(--muted);font-size:13px;font-weight:800">도담이의 오늘과 누적 성장을 한눈에 확인해요.</div>
+          </div>
+          <div class="mom-actions">
+            <button type="button" class="btn btn-soft" id="momEditRoutines">📋 루틴관리</button>
+            <button type="button" class="btn btn-soft" id="lockMom">🔒 나가기</button>
+          </div>
+        </div>
+
+        <div class="mom-metrics">
+          <div class="mom-metric"><div class="emoji">🔥</div><strong id="momStreak">0일</strong><span>연속 완성</span></div>
+          <div class="mom-metric"><div class="emoji">⭐</div><strong id="momEarned">0점</strong><span>총 획득</span></div>
+          <div class="mom-metric"><div class="emoji">🎁</div><strong id="momSpent">0점</strong><span>총 사용</span></div>
+          <div class="mom-metric"><div class="emoji">🍇</div><strong id="momBalance">0점</strong><span>현재 보유</span></div>
+        </div>
+
+        <div class="mom-grid">
+          <section class="mom-panel">
+            <h3>오늘 진행상황</h3>
+            <div style="display:flex;justify-content:space-between;font-weight:900">
+              <span id="momTodayText">0 / 0개 완료</span><span id="momTodayPct">0%</span>
+            </div>
+            <div class="today-progress"><div id="momTodayBar" style="width:0%"></div></div>
+            <div id="momTodayDetails" class="mom-list" style="margin-top:12px"></div>
+          </section>
+
+          <section class="mom-panel">
+            <h3>최근 7일 카테고리</h3>
+            <div id="momCategoryStats"></div>
+          </section>
+
+          <section class="mom-panel">
+            <h3>포인트 직접 지급·차감</h3>
+            <div class="point-control">
+              <input id="pointReason" maxlength="24" placeholder="사유 예: 줄넘기 대회">
+              <input id="pointAmount" type="number" min="-500" max="500" step="1" placeholder="+20">
+              <button type="button" class="btn btn-primary" id="applyPoint">적용</button>
+            </div>
+            <div class="mom-note">양수는 보너스, 음수는 감점입니다. 보유 포인트보다 많이 차감되지는 않아요.</div>
+            <div id="pointHistory" class="mom-list" style="margin-top:13px"></div>
+          </section>
+
+          <section class="mom-panel">
+            <h3>최근 교환내역</h3>
+            <div id="purchaseHistory" class="mom-list"></div>
+          </section>
+
+          <section class="mom-panel wide">
+            <h3>🛍️ 상점관리</h3>
+            <div id="shopAdminTabs" class="shop-admin-tabs"></div>
+            <div id="shopAdminItems"></div>
+            <button type="button" class="btn btn-soft" id="addShopItem">＋ 상품 추가</button>
+            <div class="mom-note">상품명과 가격을 수정하면 포도마을에 바로 반영됩니다. 아이콘에는 이모지를 입력하세요.</div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <nav class="bottom-nav" style="grid-template-columns:repeat(4,1fr)">
       <button class="nav-btn active" data-view="todayView">🍇 오늘</button>
       <button class="nav-btn" data-view="farmView">🌳 농장</button>
       <button class="nav-btn" data-view="villageView">🏘️ 마을</button>
+      <button class="nav-btn" data-view="momView">👩 엄마</button>
     </nav>
   </div>
 
@@ -669,7 +826,7 @@
     const CATEGORY_ICONS = {"독서":"📚","학습":"✏️","운동":"🏃","생활습관":"🪥","창의·놀이":"🎨"};
     const MOM_PASSWORD = "1234";
 
-    const SHOP_DATA = {
+    const DEFAULT_SHOP_DATA = {
       ice: {
         title:"🍦 아이스크림 가게",
         npc:"시원하고 달콤한 간식이 기다리고 있어!",
@@ -707,6 +864,10 @@
         ]
       }
     };
+    let shopData = JSON.parse(localStorage.getItem("dodam_shop_data") || "null") || JSON.parse(JSON.stringify(DEFAULT_SHOP_DATA));
+    let pointAdjustments = JSON.parse(localStorage.getItem("dodam_point_adjustments") || "[]");
+    let momUnlocked = false;
+    let activeAdminShop = "ice";
 
 
     const $ = s => document.querySelector(s);
@@ -831,12 +992,15 @@
       });
 
       const spent = purchases.reduce((sum,p)=>sum+Number(p.price||0),0);
+      const adjusted = pointAdjustments.reduce((sum,p)=>sum+Number(p.amount||0),0);
       return {
         completedDays,
         grapes: completedDays,
         totalScore,
-        spent,
-        availablePoints: Math.max(0,totalScore-spent)
+        adjusted,
+        earnedPoints: totalScore + Math.max(0, adjusted),
+        spent: spent + Math.max(0, -adjusted),
+        availablePoints: Math.max(0,totalScore + adjusted - spent)
       };
     }
 
@@ -876,7 +1040,7 @@
 
 
     function renderShop(shopKey){
-      const shop=SHOP_DATA[shopKey];
+      const shop=shopData[shopKey];
       if(!shop) return;
       const stats=getFarmStats();
 
@@ -925,6 +1089,144 @@
       $("#shopDialog").showModal();
     }
 
+
+    function calculateStreak(){
+      let streak=0;
+      const d=new Date();
+      for(let i=0;i<366;i++){
+        const key=keyDate(d);
+        if(records[key]?.completed) streak++;
+        else if(i===0){ d.setDate(d.getDate()-1); continue; }
+        else break;
+        d.setDate(d.getDate()-1);
+      }
+      return streak;
+    }
+
+    function fmtDate(iso){
+      const d=new Date(iso);
+      return `${d.getMonth()+1}/${d.getDate()}`;
+    }
+
+    function renderMomDashboard(){
+      if(!momUnlocked) return;
+      const stats=getFarmStats();
+      const done=records[todayKey]?.done || [];
+      const todayPoints=tasks.reduce((sum,t)=>sum+(done.includes(t.id)?Number(t.points||0):0),0);
+      const totalTasks=tasks.length;
+      const pct=totalTasks ? Math.round(done.filter(id=>tasks.some(t=>t.id===id)).length/totalTasks*100) : 0;
+
+      $("#momStreak").textContent=calculateStreak()+"일";
+      $("#momEarned").textContent=stats.earnedPoints+"점";
+      $("#momSpent").textContent=stats.spent+"점";
+      $("#momBalance").textContent=stats.availablePoints+"점";
+      $("#momTodayText").textContent=`${done.filter(id=>tasks.some(t=>t.id===id)).length} / ${totalTasks}개 완료`;
+      $("#momTodayPct").textContent=pct+"%";
+      $("#momTodayBar").style.width=pct+"%";
+
+      const details=$("#momTodayDetails");
+      details.innerHTML=tasks.map(t=>`
+        <div class="mom-list-item">
+          <div class="mom-list-main"><strong>${t.icon} ${escapeHtml(t.text)}</strong><small>${escapeHtml(t.category)} · ${t.points}점</small></div>
+          <span>${done.includes(t.id)?"✅":"⬜"}</span>
+        </div>`).join("");
+
+      const catBox=$("#momCategoryStats");
+      const last7=[];
+      for(let i=0;i<7;i++){
+        const d=new Date(); d.setDate(d.getDate()-i); last7.push(keyDate(d));
+      }
+      catBox.innerHTML=CATEGORIES.map(cat=>{
+        const catTasks=tasks.filter(t=>t.category===cat);
+        let possible=0,completed=0;
+        last7.forEach(key=>{
+          catTasks.forEach(t=>{
+            possible++;
+            if(records[key]?.done?.includes(t.id)) completed++;
+          });
+        });
+        const cp=possible?Math.round(completed/possible*100):0;
+        return `<div class="category-stat">
+          <div class="category-stat-head"><span>${CATEGORY_ICONS[cat]||"⭐"} ${cat}</span><span>${cp}%</span></div>
+          <div class="category-bar"><div style="width:${cp}%"></div></div>
+        </div>`;
+      }).join("");
+
+      const ph=$("#purchaseHistory");
+      const recentPurchases=[...purchases].reverse().slice(0,6);
+      ph.innerHTML=recentPurchases.length ? recentPurchases.map(p=>`
+        <div class="mom-list-item">
+          <div class="mom-list-main"><strong>${p.icon||"🎁"} ${escapeHtml(p.name)}</strong><small>${fmtDate(p.date)} · ${escapeHtml(shopData[p.shop]?.title||"포도마을")}</small></div>
+          <strong>-${p.price}점</strong>
+        </div>`).join("") : `<div class="empty-state">아직 교환한 상품이 없어요.</div>`;
+
+      const ah=$("#pointHistory");
+      const recentAdjust=[...pointAdjustments].reverse().slice(0,6);
+      ah.innerHTML=recentAdjust.length ? recentAdjust.map(a=>`
+        <div class="mom-list-item">
+          <div class="mom-list-main"><strong>${a.amount>0?"🎉":"➖"} ${escapeHtml(a.reason)}</strong><small>${fmtDate(a.date)}</small></div>
+          <strong>${a.amount>0?"+":""}${a.amount}점</strong>
+        </div>`).join("") : `<div class="empty-state">직접 지급하거나 차감한 내역이 없어요.</div>`;
+
+      renderShopAdmin();
+    }
+
+    function renderShopAdmin(){
+      const tabs=$("#shopAdminTabs");
+      tabs.innerHTML=Object.entries(shopData).map(([key,shop])=>`
+        <button type="button" class="shop-admin-tab ${key===activeAdminShop?"active":""}" data-admin-shop="${key}">
+          ${shop.title.split(" ")[0]}
+        </button>`).join("");
+      tabs.querySelectorAll("button").forEach(btn=>{
+        btn.onclick=()=>{ activeAdminShop=btn.dataset.adminShop; renderShopAdmin(); };
+      });
+
+      const shop=shopData[activeAdminShop];
+      const box=$("#shopAdminItems");
+      box.innerHTML=shop.items.map((item,index)=>`
+        <div class="shop-admin-item" data-index="${index}">
+          <input class="admin-icon" maxlength="4" value="${escapeAttr(item.icon)}" aria-label="상품 아이콘">
+          <input class="admin-name" maxlength="30" value="${escapeAttr(item.name)}" aria-label="상품명">
+          <input class="admin-price" type="number" min="0" max="9999" value="${item.price}" aria-label="가격">
+          <button type="button" class="mini-del admin-delete">삭제</button>
+        </div>`).join("");
+
+      box.querySelectorAll(".shop-admin-item").forEach(row=>{
+        const idx=Number(row.dataset.index);
+        row.querySelector(".admin-icon").onchange=e=>{ shop.items[idx].icon=e.target.value.trim()||"🎁"; saveAll(); };
+        row.querySelector(".admin-name").onchange=e=>{ shop.items[idx].name=e.target.value.trim()||"새 상품"; saveAll(); };
+        row.querySelector(".admin-price").onchange=e=>{
+          shop.items[idx].price=Math.max(0,Math.min(9999,Number(e.target.value)||0)); saveAll();
+        };
+        row.querySelector(".admin-delete").onclick=()=>{
+          if(confirm("이 상품을 삭제할까요?")){
+            shop.items.splice(idx,1); saveAll(); renderShopAdmin(); toast("상품을 삭제했어요.");
+          }
+        };
+      });
+    }
+
+    function unlockMomMode(){
+      if($("#momPassword").value!==MOM_PASSWORD){
+        $("#momPasswordError").textContent="비밀번호가 맞지 않아요.";
+        $("#momPassword").select();
+        return;
+      }
+      momUnlocked=true;
+      $("#momLock").hidden=true;
+      $("#momDashboard").hidden=false;
+      $("#momPasswordError").textContent="";
+      $("#momPassword").value="";
+      renderMomDashboard();
+    }
+
+    function lockMomMode(){
+      momUnlocked=false;
+      $("#momDashboard").hidden=true;
+      $("#momLock").hidden=false;
+      $("#momPassword").value="";
+    }
+
     function switchView(viewId){
       document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===viewId));
       document.querySelectorAll(".nav-btn").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===viewId));
@@ -933,11 +1235,12 @@
         const stats=getFarmStats();
         $("#npcBubble").textContent=`지금 사용할 수 있는 포인트는 ${stats.availablePoints}점이야!`;
       }
+      if(viewId==="momView" && momUnlocked) renderMomDashboard();
       window.scrollTo({top:0,behavior:"smooth"});
     }
 
     function renderAll(){
-      renderDate(); renderTasks(); renderGrapes(); renderWeek(); renderFarm(); saveAll();
+      renderDate(); renderTasks(); renderGrapes(); renderWeek(); renderFarm(); if(momUnlocked) renderMomDashboard(); saveAll();
     }
 
     function toggleTask(id){
@@ -1098,6 +1401,36 @@
       const r=$("#settingsDialog").getBoundingClientRect();
       if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom) $("#settingsDialog").close();
     });
+
+
+    document.querySelectorAll(".shop-building").forEach(btn=>{
+      btn.addEventListener("click",()=>renderShop(btn.dataset.shop));
+    });
+    $("#closeShop").onclick=()=>$("#shopDialog").close();
+    document.querySelectorAll(".nav-btn").forEach(btn=>{
+      btn.onclick=()=>switchView(btn.dataset.view);
+    });
+
+    $("#unlockMom").onclick=unlockMomMode;
+    $("#momPassword").addEventListener("keydown",e=>{ if(e.key==="Enter") unlockMomMode(); });
+    $("#lockMom").onclick=lockMomMode;
+    $("#momEditRoutines").onclick=openSettings;
+    $("#applyPoint").onclick=()=>{
+      const reason=$("#pointReason").value.trim()||"엄마 포인트 조정";
+      let amount=Math.trunc(Number($("#pointAmount").value)||0);
+      if(amount===0){ toast("지급하거나 차감할 점수를 입력해 주세요."); return; }
+      const current=getFarmStats().availablePoints;
+      if(amount<0) amount=-Math.min(current,Math.abs(amount));
+      if(amount===0){ toast("차감할 수 있는 포인트가 없어요."); return; }
+      pointAdjustments.push({id:crypto.randomUUID(),reason,amount,date:new Date().toISOString()});
+      $("#pointReason").value="";
+      $("#pointAmount").value="";
+      saveAll(); renderAll(); toast(amount>0?`${amount}점을 지급했어요.`:`${Math.abs(amount)}점을 차감했어요.`);
+    };
+    $("#addShopItem").onclick=()=>{
+      shopData[activeAdminShop].items.push({icon:"🎁",name:"새 상품",price:50});
+      saveAll(); renderShopAdmin(); toast("새 상품을 추가했어요.");
+    };
 
     renderAll();
   </script>
