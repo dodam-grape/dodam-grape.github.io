@@ -209,36 +209,39 @@
     </main>
   </div>
 
-  <dialog id="passwordDialog">
-    <div class="modal">
-      <div class="modal-head">
-        <h3>엄마 확인</h3>
-        <button class="close" id="closePassword">✕</button>
-      </div>
-      <p style="margin:0 0 14px;color:var(--muted);line-height:1.6">
-        설정을 바꾸려면 엄마 비밀번호 4자리를 입력해 주세요.
-      </p>
-      <input id="passwordInput" type="password" inputmode="numeric" maxlength="4"
-        placeholder="비밀번호 4자리" autocomplete="off" />
-      <div id="passwordError" style="min-height:22px;margin-top:8px;color:var(--danger);font-size:14px;font-weight:700"></div>
-      <div class="modal-foot">
-        <button class="btn btn-soft" id="cancelPassword">취소</button>
-        <button class="btn btn-primary" id="confirmPassword">확인</button>
-      </div>
-    </div>
-  </dialog>
-
   <dialog id="settingsDialog">
     <div class="modal">
       <div class="modal-head">
-        <h3>오늘 할 일 설정</h3>
-        <button class="close" id="closeSettings">✕</button>
+        <h3 id="settingsTitle">엄마 설정</h3>
+        <button type="button" class="close" id="closeSettings">✕</button>
       </div>
-      <div id="taskEditor"></div>
-      <button class="btn btn-soft" id="addTask">＋ 할 일 추가</button>
-      <div class="modal-foot">
-        <button class="btn btn-soft" id="cancelSettings">취소</button>
-        <button class="btn btn-primary" id="saveSettings">저장하기</button>
+
+      <div id="lockPanel">
+        <p style="margin:0 0 14px;color:var(--muted);line-height:1.6">
+          설정을 바꾸려면 엄마 비밀번호 4자리를 입력해 주세요.
+        </p>
+        <input
+          id="passwordInput"
+          type="password"
+          inputmode="numeric"
+          maxlength="4"
+          placeholder="비밀번호 4자리"
+          autocomplete="off"
+        />
+        <div id="passwordError" style="min-height:22px;margin-top:8px;color:var(--danger);font-size:14px;font-weight:700"></div>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-soft" id="cancelPassword">취소</button>
+          <button type="button" class="btn btn-primary" id="confirmPassword">확인</button>
+        </div>
+      </div>
+
+      <div id="editorPanel" hidden>
+        <div id="taskEditor"></div>
+        <button type="button" class="btn btn-soft" id="addTask">＋ 할 일 추가</button>
+        <div class="modal-foot">
+          <button type="button" class="btn btn-soft" id="cancelSettings">취소</button>
+          <button type="button" class="btn btn-primary" id="saveSettings">저장하기</button>
+        </div>
       </div>
     </div>
   </dialog>
@@ -257,7 +260,6 @@
     ];
     const ICONS = ["🎒","📚","✏️","🧮","🪢","🧸","🪥","🧹","🎨","🎵","💬","⭐"];
     const MOM_PASSWORD = "1234";
-    let pendingProtectedAction = null;
 
     const $ = s => document.querySelector(s);
     const keyDate = (d=new Date()) => {
@@ -354,29 +356,26 @@
       }
     }
 
-    function requestPassword(action){
-      pendingProtectedAction = action;
+    function openSettings(){
+      $("#settingsTitle").textContent = "엄마 설정";
+      $("#lockPanel").hidden = false;
+      $("#editorPanel").hidden = true;
       $("#passwordInput").value = "";
       $("#passwordError").textContent = "";
-      $("#passwordDialog").showModal();
+      $("#settingsDialog").showModal();
       setTimeout(()=>$("#passwordInput").focus(),50);
     }
 
-    function checkPassword(){
-      if($("#passwordInput").value === MOM_PASSWORD){
-        $("#passwordDialog").close();
-        const action = pendingProtectedAction;
-        pendingProtectedAction = null;
-        if(action) action();
-      }else{
+    function unlockSettings(){
+      if($("#passwordInput").value !== MOM_PASSWORD){
         $("#passwordError").textContent = "비밀번호가 맞지 않아요.";
         $("#passwordInput").select();
+        return;
       }
-    }
-
-    function openSettings(){
+      $("#settingsTitle").textContent = "오늘 할 일 설정";
+      $("#lockPanel").hidden = true;
+      $("#editorPanel").hidden = false;
       renderEditor();
-      $("#settingsDialog").showModal();
     }
 
     function renderEditor(){
@@ -415,13 +414,17 @@
       renderAll(); toast("할 일을 저장했어요.");
     };
 
-    function resetTodayChecks(){
+    $("#resetToday").onclick=()=>{
+      const pw = prompt("오늘 체크를 초기화하려면 엄마 비밀번호 4자리를 입력해 주세요.");
+      if(pw === null) return;
+      if(pw !== MOM_PASSWORD){
+        toast("비밀번호가 맞지 않아요.");
+        return;
+      }
       if(confirm("오늘 체크한 내용을 모두 지울까요?")){
         records[todayKey]={done:[],completed:false}; renderAll(); toast("오늘 체크를 초기화했어요.");
       }
-    }
-
-    $("#resetToday").onclick=()=>requestPassword(resetTodayChecks);
+    };
 
     function celebrate(){
       const wrap=$("#confetti");
@@ -449,28 +452,13 @@
     }
     function escapeAttr(s){ return escapeHtml(s); }
 
-    $("#openSettings").onclick=()=>requestPassword(openSettings);
-    $("#openSettings2").onclick=()=>requestPassword(openSettings);
-    $("#confirmPassword").onclick=checkPassword;
+    $("#openSettings").onclick=openSettings;
+    $("#openSettings2").onclick=openSettings;
+    $("#confirmPassword").onclick=unlockSettings;
     $("#passwordInput").addEventListener("keydown",e=>{
-      if(e.key==="Enter") checkPassword();
+      if(e.key==="Enter") unlockSettings();
     });
-    $("#closePassword").onclick=()=>{
-      pendingProtectedAction=null;
-      $("#passwordDialog").close();
-    };
-    $("#cancelPassword").onclick=()=>{
-      pendingProtectedAction=null;
-      $("#passwordDialog").close();
-    };
-    $("#passwordDialog").addEventListener("click",e=>{
-      const r=$("#passwordDialog").getBoundingClientRect();
-      if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom){
-        pendingProtectedAction=null;
-        $("#passwordDialog").close();
-      }
-    });
-
+    $("#cancelPassword").onclick=()=>$("#settingsDialog").close();
     $("#closeSettings").onclick=()=>$("#settingsDialog").close();
     $("#cancelSettings").onclick=()=>$("#settingsDialog").close();
     $("#settingsDialog").addEventListener("click",e=>{
