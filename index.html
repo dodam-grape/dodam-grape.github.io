@@ -142,6 +142,126 @@
     .icon-select{font-size:20px;text-align:center}
     .mini-del{border:0;background:#fff0f1;color:var(--danger);border-radius:12px;padding:0 12px}
     .modal-foot{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}
+
+    .task-main{min-width:0}
+    .task-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+    .badge{
+      display:inline-flex;align-items:center;gap:4px;padding:4px 8px;border-radius:999px;
+      font-size:11px;font-weight:800;background:#f4eef8;color:var(--purple)
+    }
+    .badge.required{background:#fff1dc;color:#a56800}
+    .badge.optional{background:#edf7ef;color:#3f7d46}
+    .badge.point{background:#eef4ff;color:#486ea9}
+    .editor-card{
+      border:1px solid var(--line);border-radius:18px;padding:14px;margin-bottom:12px;background:#fff
+    }
+    .editor-grid{
+      display:grid;grid-template-columns:86px 1fr;gap:10px;align-items:center;margin-top:10px
+    }
+    .editor-grid label{font-size:13px;font-weight:800;color:var(--muted)}
+    .editor-actions{display:flex;justify-content:flex-end;margin-top:10px}
+    .required-check{display:flex;align-items:center;gap:8px}
+    .required-check input{width:auto}
+    .score-summary{
+      margin-top:14px;padding:12px 14px;border-radius:16px;background:#f7f2fa;
+      color:var(--purple);font-weight:800;text-align:center
+    }
+
+    .view{display:none}
+    .view.active{display:block}
+    .bottom-nav{
+      position:sticky;bottom:12px;z-index:15;margin:18px auto 0;
+      display:grid;grid-template-columns:1fr 1fr;gap:10px;
+      max-width:430px;padding:8px;background:rgba(255,255,255,.92);
+      border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+      backdrop-filter:blur(10px)
+    }
+    .nav-btn{
+      border:0;border-radius:15px;padding:12px 10px;background:transparent;
+      color:var(--muted);font-weight:900
+    }
+    .nav-btn.active{background:var(--purple);color:#fff}
+    .farm-hero{
+      background:linear-gradient(180deg,#bfe7ff 0 42%,#dff2b9 42% 100%);
+      border-radius:28px;padding:18px;box-shadow:var(--shadow);overflow:hidden;position:relative;
+      min-height:430px
+    }
+    .farm-sky{position:absolute;inset:0 0 auto 0;height:42%}
+    .sun{
+      position:absolute;right:28px;top:24px;width:66px;height:66px;border-radius:50%;
+      background:#ffd85b;box-shadow:0 0 0 12px rgba(255,216,91,.18)
+    }
+    .cloud{position:absolute;font-size:50px;filter:drop-shadow(0 5px 8px rgba(0,0,0,.08))}
+    .cloud.c1{left:24px;top:18px}.cloud.c2{left:130px;top:72px;font-size:38px}
+    .farm-title{position:relative;z-index:2;text-align:center;margin:6px 0 4px;font-size:24px}
+    .farm-sub{position:relative;z-index:2;text-align:center;color:#5f6a73;font-weight:700}
+    .farm-scene{
+      position:relative;z-index:2;min-height:315px;margin-top:12px;
+      display:flex;align-items:flex-end;justify-content:center
+    }
+    .vine{
+      position:relative;width:300px;height:280px;transform-origin:bottom center;
+      transition:.4s ease
+    }
+    .trunk{
+      position:absolute;bottom:18px;left:141px;width:22px;height:150px;
+      background:linear-gradient(90deg,#76502f,#9b7044,#6b472a);border-radius:14px
+    }
+    .branch{
+      position:absolute;height:14px;background:#795333;border-radius:999px;
+      transform-origin:left center
+    }
+    .branch.b1{width:120px;left:150px;bottom:135px;transform:rotate(-22deg)}
+    .branch.b2{width:120px;left:35px;bottom:135px;transform:rotate(202deg)}
+    .branch.b3{width:94px;left:150px;bottom:95px;transform:rotate(15deg)}
+    .branch.b4{width:94px;left:55px;bottom:95px;transform:rotate(165deg)}
+    .farm-leaf{
+      position:absolute;width:55px;height:36px;background:#64a857;
+      border-radius:70% 20% 70% 20%;box-shadow:inset 0 -6px rgba(0,0,0,.05)
+    }
+    .farm-leaf.l1{left:38px;bottom:160px;transform:rotate(-20deg)}
+    .farm-leaf.l2{left:88px;bottom:205px;transform:rotate(22deg)}
+    .farm-leaf.l3{left:205px;bottom:206px;transform:rotate(-14deg)}
+    .farm-leaf.l4{left:232px;bottom:155px;transform:rotate(28deg)}
+    .farm-leaf.l5{left:78px;bottom:102px;transform:rotate(12deg)}
+    .farm-leaf.l6{left:200px;bottom:108px;transform:rotate(-22deg)}
+    .bunch{
+      position:absolute;font-size:46px;filter:drop-shadow(0 6px 8px rgba(72,40,92,.18));
+      animation:bob 2.4s ease-in-out infinite
+    }
+    .bunch.p1{left:65px;bottom:125px}.bunch.p2{left:185px;bottom:128px;animation-delay:.3s}
+    .bunch.p3{left:117px;bottom:72px;animation-delay:.6s}
+    .farm-ground{
+      position:absolute;left:0;right:0;bottom:0;height:58px;
+      background:linear-gradient(#8acb65,#69ad4c)
+    }
+    .farm-deco{position:absolute;bottom:18px;font-size:34px;z-index:3}
+    .farm-deco.d1{left:24px}.farm-deco.d2{right:30px}.farm-deco.d3{right:90px;font-size:27px}
+    @keyframes bob{50%{transform:translateY(-5px)}}
+    .farm-stats{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px
+    }
+    .stat{
+      background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;
+      text-align:center;box-shadow:var(--shadow)
+    }
+    .stat strong{display:block;font-size:24px;color:var(--purple);margin-top:4px}
+    .milestone{margin-top:16px}
+    .milestone-row{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff
+    }
+    .level-badge{
+      display:inline-block;padding:6px 10px;border-radius:999px;
+      background:#efe3fa;color:var(--purple);font-weight:900;font-size:12px
+    }
+    .farm-progress{height:12px;background:#eee6f3;border-radius:999px;overflow:hidden;margin-top:10px}
+    .farm-progress-bar{height:100%;background:linear-gradient(90deg,var(--purple2),var(--purple));width:0}
+    @media(max-width:700px){
+      .farm-stats{grid-template-columns:1fr 1fr 1fr}
+      .farm-hero{min-height:405px}
+      .vine{transform:scale(.9)}
+    }
     .toast{
       position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);
       background:#2e2533;color:#fff;padding:12px 18px;border-radius:999px;
@@ -164,6 +284,8 @@
 </head>
 <body>
   <div class="app">
+    <section id="todayView" class="view active">
+
     <section class="hero">
       <div class="hero-top">
         <div>
@@ -207,6 +329,62 @@
         <div class="week" id="weekView"></div>
       </section>
     </main>
+  
+    </section>
+
+    <section id="farmView" class="view">
+      <div class="farm-hero">
+        <div class="farm-sky">
+          <div class="sun"></div>
+          <div class="cloud c1">☁️</div>
+          <div class="cloud c2">☁️</div>
+        </div>
+        <h2 class="farm-title">도담이의 포도농장</h2>
+        <div class="farm-sub" id="farmMessage">오늘도 포도나무를 키워볼까요?</div>
+
+        <div class="farm-scene">
+          <div class="vine" id="vine">
+            <div class="trunk"></div>
+            <div class="branch b1"></div><div class="branch b2"></div>
+            <div class="branch b3"></div><div class="branch b4"></div>
+            <div class="farm-leaf l1"></div><div class="farm-leaf l2"></div>
+            <div class="farm-leaf l3"></div><div class="farm-leaf l4"></div>
+            <div class="farm-leaf l5"></div><div class="farm-leaf l6"></div>
+            <div class="bunch p1" id="bunch1">🍇</div>
+            <div class="bunch p2" id="bunch2">🍇</div>
+            <div class="bunch p3" id="bunch3">🍇</div>
+          </div>
+        </div>
+
+        <div class="farm-ground"></div>
+        <div class="farm-deco d1">🌻</div>
+        <div class="farm-deco d2">🌻</div>
+        <div class="farm-deco d3">🌻</div>
+      </div>
+
+      <div class="farm-stats">
+        <div class="stat">완성한 날<strong id="completedDays">0일</strong></div>
+        <div class="stat">모은 포도<strong id="totalGrapes">0송이</strong></div>
+        <div class="stat">누적 점수<strong id="totalScore">0점</strong></div>
+      </div>
+
+      <section class="card milestone">
+        <div class="milestone-row">
+          <div>
+            <span class="level-badge" id="farmLevel">새싹 농장</span>
+            <h2 style="margin:8px 0 3px" id="nextGoalTitle">다음 목표까지</h2>
+            <div style="color:var(--muted);font-size:14px" id="nextGoalText">포도 3송이를 더 모아보세요.</div>
+          </div>
+          <div style="font-size:42px" id="levelIcon">🌱</div>
+        </div>
+        <div class="farm-progress"><div class="farm-progress-bar" id="farmProgressBar"></div></div>
+      </section>
+    </section>
+
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-view="todayView">🍇 오늘</button>
+      <button class="nav-btn" data-view="farmView">🌳 포도농장</button>
+    </nav>
   </div>
 
   <dialog id="settingsDialog">
@@ -251,14 +429,16 @@
 
   <script>
     const DEFAULT_TASKS = [
-      {id: crypto.randomUUID(), icon:"🎒", text:"학교 가방 정리하기"},
-      {id: crypto.randomUUID(), icon:"📚", text:"책 20분 읽기"},
-      {id: crypto.randomUUID(), icon:"✏️", text:"오늘 공부 끝내기"},
-      {id: crypto.randomUUID(), icon:"🪢", text:"줄넘기 또는 몸 움직이기"},
-      {id: crypto.randomUUID(), icon:"🧸", text:"내 물건 제자리 정리하기"},
-      {id: crypto.randomUUID(), icon:"🪥", text:"양치하고 잠자리 준비하기"}
+      {id: crypto.randomUUID(), icon:"🎒", text:"학교 가방 정리하기", category:"생활습관", required:true, points:2},
+      {id: crypto.randomUUID(), icon:"📚", text:"책 20분 읽기", category:"독서", required:true, points:2},
+      {id: crypto.randomUUID(), icon:"✏️", text:"오늘 공부 끝내기", category:"학습", required:true, points:2},
+      {id: crypto.randomUUID(), icon:"🪢", text:"줄넘기 또는 몸 움직이기", category:"운동", required:false, points:1},
+      {id: crypto.randomUUID(), icon:"🧸", text:"내 물건 제자리 정리하기", category:"생활습관", required:true, points:2},
+      {id: crypto.randomUUID(), icon:"🪥", text:"양치하고 잠자리 준비하기", category:"생활습관", required:true, points:2}
     ];
     const ICONS = ["🎒","📚","✏️","🧮","🪢","🧸","🪥","🧹","🎨","🎵","💬","⭐"];
+    const CATEGORIES = ["독서","학습","운동","생활습관","창의·놀이"];
+    const CATEGORY_ICONS = {"독서":"📚","학습":"✏️","운동":"🏃","생활습관":"🪥","창의·놀이":"🎨"};
     const MOM_PASSWORD = "1234";
 
     const $ = s => document.querySelector(s);
@@ -269,6 +449,12 @@
     const todayKey = keyDate();
 
     let tasks = JSON.parse(localStorage.getItem("dodam_tasks") || "null") || DEFAULT_TASKS;
+    tasks = tasks.map(t=>({
+      ...t,
+      category: t.category || "생활습관",
+      required: typeof t.required === "boolean" ? t.required : true,
+      points: Number.isFinite(Number(t.points)) ? Math.max(0, Number(t.points)) : 2
+    }));
     let records = JSON.parse(localStorage.getItem("dodam_records") || "{}");
     if(!records[todayKey]) records[todayKey] = {done:[], completed:false};
 
@@ -296,11 +482,27 @@
         row.className="task"+(doneSet.has(t.id)?" done":"");
         row.innerHTML=`
           <button class="check" aria-label="완료 체크">${doneSet.has(t.id)?"✓":""}</button>
-          <div class="task-text">${escapeHtml(t.text)}</div>
+          <div class="task-main">
+            <div class="task-text">${escapeHtml(t.text)}</div>
+            <div class="task-meta">
+              <span class="badge">${CATEGORY_ICONS[t.category] || "📌"} ${escapeHtml(t.category)}</span>
+              <span class="badge ${t.required ? "required" : "optional"}">${t.required ? "필수" : "선택"}</span>
+              <span class="badge point">${t.points}점</span>
+            </div>
+          </div>
           <div class="task-icon">${t.icon}</div>`;
         row.querySelector(".check").onclick=()=>toggleTask(t.id);
         box.appendChild(row);
       });
+
+      const earned = tasks
+        .filter(t=>doneSet.has(t.id))
+        .reduce((sum,t)=>sum+Number(t.points||0),0);
+      const totalPoints = tasks.reduce((sum,t)=>sum+Number(t.points||0),0);
+      const summary=document.createElement("div");
+      summary.className="score-summary";
+      summary.textContent=`오늘 획득 포인트 ${earned} / ${totalPoints}점`;
+      box.appendChild(summary);
     }
 
     function renderGrapes(){
@@ -318,7 +520,14 @@
       const pct=total?Math.round(doneCount/total*100):0;
       $("#progressText").textContent=`${doneCount} / ${total}`;
       $("#progressBar").style.width=pct+"%";
-      $("#cheer").textContent = total && doneCount===total ? "🍇 오늘의 포도송이 완성!" : doneCount ? "좋아! 한 알씩 채우고 있어요." : "첫 번째 포도알부터 시작해 볼까요?";
+      const requiredTasks = tasks.filter(t=>t.required);
+      const requiredDone = requiredTasks.filter(t=>records[todayKey].done.includes(t.id)).length;
+      $("#cheer").textContent =
+        requiredTasks.length && requiredDone===requiredTasks.length
+          ? "🍇 필수 루틴을 모두 완성했어요!"
+          : doneCount
+            ? "좋아! 한 알씩 채우고 있어요."
+            : "첫 번째 포도알부터 시작해 볼까요?";
     }
 
     function renderWeek(){
@@ -339,8 +548,69 @@
       }
     }
 
+
+    function getFarmStats(){
+      let completedDays=0;
+      let totalScore=0;
+
+      Object.values(records).forEach(record=>{
+        if(record?.completed) completedDays++;
+        const doneIds=new Set(record?.done || []);
+        totalScore += tasks
+          .filter(t=>doneIds.has(t.id))
+          .reduce((sum,t)=>sum+Number(t.points||0),0);
+      });
+
+      return {
+        completedDays,
+        grapes: completedDays,
+        totalScore
+      };
+    }
+
+    function getFarmLevel(grapes){
+      if(grapes < 3) return {name:"새싹 농장",icon:"🌱",min:0,max:3,message:"첫 포도송이를 기다리고 있어요!"};
+      if(grapes < 7) return {name:"어린 포도나무",icon:"🌿",min:3,max:7,message:"포도나무에 잎이 무성해졌어요!"};
+      if(grapes < 15) return {name:"포도송이 농장",icon:"🍇",min:7,max:15,message:"달콤한 포도송이가 열리고 있어요!"};
+      if(grapes < 30) return {name:"풍성한 포도밭",icon:"🌳",min:15,max:30,message:"농장이 점점 풍성해지고 있어요!"};
+      return {name:"도담이 포도왕국",icon:"🏰",min:30,max:50,message:"도담이만의 멋진 포도왕국이에요!"};
+    }
+
+    function renderFarm(){
+      const stats=getFarmStats();
+      const level=getFarmLevel(stats.grapes);
+
+      $("#completedDays").textContent=stats.completedDays+"일";
+      $("#totalGrapes").textContent=stats.grapes+"송이";
+      $("#totalScore").textContent=stats.totalScore+"점";
+      $("#farmLevel").textContent=level.name;
+      $("#levelIcon").textContent=level.icon;
+      $("#farmMessage").textContent=level.message;
+
+      const remaining=Math.max(0,level.max-stats.grapes);
+      $("#nextGoalTitle").textContent=remaining ? "다음 단계까지" : "최고 단계 달성!";
+      $("#nextGoalText").textContent=remaining ? `포도 ${remaining}송이를 더 모아보세요.` : "정말 멋진 농장이 완성됐어요!";
+      const pct=Math.min(100,Math.max(0,(stats.grapes-level.min)/(level.max-level.min)*100));
+      $("#farmProgressBar").style.width=pct+"%";
+
+      $("#bunch1").style.display=stats.grapes>=1?"block":"none";
+      $("#bunch2").style.display=stats.grapes>=3?"block":"none";
+      $("#bunch3").style.display=stats.grapes>=7?"block":"none";
+
+      const scale=0.72+Math.min(stats.grapes,30)/30*0.28;
+      $("#vine").style.transform=`scale(${scale})`;
+      $("#vine").style.opacity=stats.grapes===0?".45":"1";
+    }
+
+    function switchView(viewId){
+      document.querySelectorAll(".view").forEach(v=>v.classList.toggle("active",v.id===viewId));
+      document.querySelectorAll(".nav-btn").forEach(btn=>btn.classList.toggle("active",btn.dataset.view===viewId));
+      if(viewId==="farmView") renderFarm();
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+
     function renderAll(){
-      renderDate(); renderTasks(); renderGrapes(); renderWeek(); saveAll();
+      renderDate(); renderTasks(); renderGrapes(); renderWeek(); renderFarm(); saveAll();
     }
 
     function toggleTask(id){
@@ -348,8 +618,13 @@
       const i=list.indexOf(id);
       if(i>=0) list.splice(i,1); else list.push(id);
       const wasCompleted=records[todayKey].completed;
-      records[todayKey].completed = tasks.length>0 && tasks.every(t=>list.includes(t.id));
-      renderAll();
+      const requiredTasks = tasks.filter(t=>t.required);
+      records[todayKey].completed = requiredTasks.length>0 && requiredTasks.every(t=>list.includes(t.id));
+      document.querySelectorAll(".nav-btn").forEach(btn=>{
+      btn.onclick=()=>switchView(btn.dataset.view);
+    });
+
+    renderAll();
       if(records[todayKey].completed && !wasCompleted){
         celebrate();
         toast("오늘 포도송이를 완성했어요!");
@@ -382,36 +657,61 @@
       const box=$("#taskEditor");
       box.innerHTML="";
       tasks.forEach((t,index)=>{
-        const row=document.createElement("div");
-        row.className="form-row";
-        const options=ICONS.map(ic=>`<option value="${ic}" ${ic===t.icon?"selected":""}>${ic}</option>`).join("");
-        row.innerHTML=`
-          <select class="icon-select" data-index="${index}">${options}</select>
-          <input data-index="${index}" value="${escapeAttr(t.text)}" maxlength="30" />
-          <button class="mini-del" data-index="${index}">삭제</button>`;
-        row.querySelector(".mini-del").onclick=()=>{
-          tasks.splice(index,1); renderEditor();
+        const card=document.createElement("div");
+        card.className="editor-card";
+        const iconOptions=ICONS.map(ic=>`<option value="${ic}" ${ic===t.icon?"selected":""}>${ic}</option>`).join("");
+        const categoryOptions=CATEGORIES.map(cat=>`<option value="${cat}" ${cat===t.category?"selected":""}>${cat}</option>`).join("");
+        card.innerHTML=`
+          <div class="editor-grid">
+            <label>아이콘</label>
+            <select class="icon-select">${iconOptions}</select>
+
+            <label>할 일</label>
+            <input class="task-name" value="${escapeAttr(t.text)}" maxlength="30" />
+
+            <label>카테고리</label>
+            <select class="category-select">${categoryOptions}</select>
+
+            <label>구분</label>
+            <label class="required-check">
+              <input class="required-input" type="checkbox" ${t.required?"checked":""}>
+              필수 루틴
+            </label>
+
+            <label>포인트</label>
+            <input class="points-input" type="number" min="0" max="20" step="1" value="${t.points}" />
+          </div>
+          <div class="editor-actions">
+            <button type="button" class="mini-del">삭제</button>
+          </div>`;
+        card.querySelector(".mini-del").onclick=()=>{
+          tasks.splice(index,1);
+          renderEditor();
         };
-        box.appendChild(row);
+        box.appendChild(card);
       });
     }
 
     $("#addTask").onclick=()=>{
       if(tasks.length>=9){ toast("포도알은 최대 9개까지 만들 수 있어요."); return; }
-      tasks.push({id:crypto.randomUUID(),icon:"⭐",text:"새로운 할 일"});
+      tasks.push({id:crypto.randomUUID(),icon:"⭐",text:"새로운 할 일",category:"생활습관",required:true,points:2});
       renderEditor();
     };
 
     $("#saveSettings").onclick=()=>{
-      const rows=[...document.querySelectorAll(".form-row")];
-      rows.forEach((row,i)=>{
-        tasks[i].icon=row.querySelector("select").value;
-        tasks[i].text=row.querySelector("input").value.trim() || "할 일";
+      const cards=[...document.querySelectorAll(".editor-card")];
+      cards.forEach((card,i)=>{
+        tasks[i].icon=card.querySelector(".icon-select").value;
+        tasks[i].text=card.querySelector(".task-name").value.trim() || "할 일";
+        tasks[i].category=card.querySelector(".category-select").value;
+        tasks[i].required=card.querySelector(".required-input").checked;
+        tasks[i].points=Math.max(0,Math.min(20,Number(card.querySelector(".points-input").value)||0));
       });
       records[todayKey].done = records[todayKey].done.filter(id=>tasks.some(t=>t.id===id));
-      records[todayKey].completed = tasks.length>0 && tasks.every(t=>records[todayKey].done.includes(t.id));
+      const requiredTasks = tasks.filter(t=>t.required);
+      records[todayKey].completed = requiredTasks.length>0 && requiredTasks.every(t=>records[todayKey].done.includes(t.id));
       $("#settingsDialog").close();
-      renderAll(); toast("할 일을 저장했어요.");
+      renderAll(); toast("루틴 설정을 저장했어요.");
     };
 
     $("#resetToday").onclick=()=>{
@@ -470,3 +770,4 @@
   </script>
 </body>
 </html>
+
