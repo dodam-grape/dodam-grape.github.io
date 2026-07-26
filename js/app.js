@@ -53,6 +53,7 @@ const DEFAULT_TASKS = [
     let pointAdjustments = JSON.parse(localStorage.getItem("dodam_point_adjustments") || "[]");
     let momUnlocked = false;
     let activeAdminShop = "ice";
+    let shopAdminDirty = false;
 
 
     const $ = s => document.querySelector(s);
@@ -215,8 +216,8 @@ const DEFAULT_TASKS = [
       $("#farmProgressBar").style.width=pct+"%";
 
       $("#bunch1").style.display=stats.grapes>=1?"block":"none";
-      $("#bunch2").style.display=stats.grapes>=3?"block":"none";
-      $("#bunch3").style.display=stats.grapes>=7?"block":"none";
+      $("#bunch2").style.display=stats.grapes>=2?"block":"none";
+      $("#bunch3").style.display=stats.grapes>=3?"block":"none";
 
       const scale=0.72+Math.min(stats.grapes,30)/30*0.28;
       $("#vine").style.transform=`scale(${scale})`;
@@ -363,7 +364,12 @@ const DEFAULT_TASKS = [
           ${shop.title.split(" ")[0]}
         </button>`).join("");
       tabs.querySelectorAll("button").forEach(btn=>{
-        btn.onclick=()=>{ activeAdminShop=btn.dataset.adminShop; renderShopAdmin(); };
+        btn.onclick=()=>{
+          if(shopAdminDirty && !confirm("저장하지 않은 변경사항이 있어요. 저장하지 않고 다른 가게로 이동할까요?")) return;
+          shopAdminDirty=false;
+          activeAdminShop=btn.dataset.adminShop;
+          renderShopAdmin();
+        };
       });
 
       const shop=shopData[activeAdminShop];
@@ -377,18 +383,54 @@ const DEFAULT_TASKS = [
         </div>`).join("");
 
       box.querySelectorAll(".shop-admin-item").forEach(row=>{
-        const idx=Number(row.dataset.index);
-        row.querySelector(".admin-icon").onchange=e=>{ shop.items[idx].icon=e.target.value.trim()||"🎁"; saveAll(); };
-        row.querySelector(".admin-name").onchange=e=>{ shop.items[idx].name=e.target.value.trim()||"새 상품"; saveAll(); };
-        row.querySelector(".admin-price").onchange=e=>{
-          shop.items[idx].price=Math.max(0,Math.min(9999,Number(e.target.value)||0)); saveAll();
-        };
+        row.querySelectorAll("input").forEach(input=>{
+          input.addEventListener("input",()=>{
+            shopAdminDirty=true;
+            const status=$("#shopSaveStatus");
+            if(status){
+              status.textContent="⚠️ 저장하지 않은 변경사항이 있어요.";
+              status.style.color="var(--danger)";
+              status.style.fontWeight="900";
+            }
+          });
+        });
         row.querySelector(".admin-delete").onclick=()=>{
+          const idx=Number(row.dataset.index);
           if(confirm("이 상품을 삭제할까요?")){
-            shop.items.splice(idx,1); saveAll(); renderShopAdmin(); toast("상품을 삭제했어요.");
+            shop.items.splice(idx,1);
+            saveAll();
+            shopAdminDirty=false;
+            renderShopAdmin();
+            toast("상품을 삭제했어요.");
           }
         };
       });
+
+      const status=$("#shopSaveStatus");
+      if(status && !shopAdminDirty){
+        status.textContent="상품을 수정한 뒤 반드시 ‘변경사항 저장’을 눌러주세요.";
+        status.style.color="";
+        status.style.fontWeight="";
+      }
+    }
+
+    function saveShopAdminChanges(){
+      const shop=shopData[activeAdminShop];
+      const rows=[...$("#shopAdminItems").querySelectorAll(".shop-admin-item")];
+      shop.items=rows.map(row=>({
+        icon:row.querySelector(".admin-icon").value.trim()||"🎁",
+        name:row.querySelector(".admin-name").value.trim()||"새 상품",
+        price:Math.max(0,Math.min(9999,Number(row.querySelector(".admin-price").value)||0))
+      }));
+      saveAll();
+      shopAdminDirty=false;
+      const status=$("#shopSaveStatus");
+      if(status){
+        status.textContent="✅ 저장되었습니다. 포도마을 상점에 바로 반영됐어요.";
+        status.style.color="var(--green)";
+        status.style.fontWeight="900";
+      }
+      toast("상점 상품을 저장했어요.");
     }
 
     function unlockMomMode(){
@@ -612,9 +654,14 @@ const DEFAULT_TASKS = [
       $("#pointAmount").value="";
       saveAll(); renderAll(); toast(amount>0?`${amount}점을 지급했어요.`:`${Math.abs(amount)}점을 차감했어요.`);
     };
+    $("#saveShopItems").onclick=saveShopAdminChanges;
     $("#addShopItem").onclick=()=>{
+      if(shopAdminDirty) saveShopAdminChanges();
       shopData[activeAdminShop].items.push({icon:"🎁",name:"새 상품",price:50});
-      saveAll(); renderShopAdmin(); toast("새 상품을 추가했어요.");
+      saveAll();
+      shopAdminDirty=false;
+      renderShopAdmin();
+      toast("새 상품을 추가했어요. 내용을 수정한 뒤 저장해 주세요.");
     };
 
     renderAll();
