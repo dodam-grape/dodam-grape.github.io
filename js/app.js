@@ -11,45 +11,7 @@ const DEFAULT_TASKS = [
     const CATEGORY_ICONS = {"독서":"📚","학습":"✏️","운동":"🏃","생활습관":"🪥","창의·놀이":"🎨"};
     const MOM_PASSWORD = "1234";
 
-    const DEFAULT_SHOP_DATA = {
-      ice: {
-        title:"🍦 아이스크림 가게",
-        npc:"시원하고 달콤한 간식이 기다리고 있어!",
-        items:[
-          {icon:"🍦",name:"아이스크림 먹기",price:30},
-          {icon:"🍧",name:"빙수 먹기",price:50},
-          {icon:"🧃",name:"좋아하는 음료",price:20}
-        ]
-      },
-      book: {
-        title:"📚 포도마을 책방",
-        npc:"새로운 이야기를 골라볼까?",
-        items:[
-          {icon:"📕",name:"새 책 한 권",price:100},
-          {icon:"🏛️",name:"도서관 나들이",price:40},
-          {icon:"🌙",name:"잠자리 책 2권",price:25}
-        ]
-      },
-      gift: {
-        title:"🎁 포도마을 선물가게",
-        npc:"열심히 모은 포인트로 특별한 선물을 골라봐!",
-        items:[
-          {icon:"🧸",name:"작은 장난감",price:150},
-          {icon:"🧱",name:"블록·레고",price:300},
-          {icon:"✏️",name:"예쁜 학용품",price:80}
-        ]
-      },
-      play: {
-        title:"🎡 포도마을 놀이가게",
-        npc:"신나는 경험도 포인트로 살 수 있단다!",
-        items:[
-          {icon:"🎮",name:"게임 30분",price:40},
-          {icon:"🍿",name:"가족 영화 보기",price:120},
-          {icon:"🎠",name:"키즈카페 가기",price:250}
-        ]
-      }
-    };
-    let shopData = JSON.parse(localStorage.getItem("dodam_shop_data") || "null") || JSON.parse(JSON.stringify(DEFAULT_SHOP_DATA));
+    let shopData = ShopStore.getData();
     let pointAdjustments = JSON.parse(localStorage.getItem("dodam_point_adjustments") || "[]");
     let momUnlocked = false;
     let activeAdminShop = "ice";
@@ -77,6 +39,9 @@ const DEFAULT_TASKS = [
     function saveAll(){
       localStorage.setItem("dodam_tasks", JSON.stringify(tasks));
       localStorage.setItem("dodam_records", JSON.stringify(records));
+      localStorage.setItem("dodam_purchases", JSON.stringify(purchases));
+      ShopStore.saveData(shopData);
+      localStorage.setItem("dodam_point_adjustments", JSON.stringify(pointAdjustments));
     }
 
     function renderDate(){
@@ -226,6 +191,7 @@ const DEFAULT_TASKS = [
 
 
     function renderShop(shopKey){
+      shopData=ShopStore.getData();
       const shop=shopData[shopKey];
       if(!shop) return;
       const stats=getFarmStats();
@@ -398,7 +364,7 @@ const DEFAULT_TASKS = [
           const idx=Number(row.dataset.index);
           if(confirm("이 상품을 삭제할까요?")){
             shop.items.splice(idx,1);
-            saveAll();
+            ShopStore.saveData(shopData);
             shopAdminDirty=false;
             renderShopAdmin();
             toast("상품을 삭제했어요.");
@@ -417,19 +383,30 @@ const DEFAULT_TASKS = [
     function saveShopAdminChanges(){
       const shop=shopData[activeAdminShop];
       const rows=[...$("#shopAdminItems").querySelectorAll(".shop-admin-item")];
+
       shop.items=rows.map(row=>({
         icon:row.querySelector(".admin-icon").value.trim()||"🎁",
         name:row.querySelector(".admin-name").value.trim()||"새 상품",
-        price:Math.max(0,Math.min(9999,Number(row.querySelector(".admin-price").value)||0))
+        price:Math.max(0,Math.min(9999,Number(row.querySelector(".admin-price").value)||0)),
+        enabled:true
       }));
-      saveAll();
+
+      const result=ShopStore.saveData(shopData);
+      if(!result.ok){
+        toast("저장 중 오류가 발생했어요.");
+        return;
+      }
+
+      shopData=ShopStore.getData();
       shopAdminDirty=false;
       const status=$("#shopSaveStatus");
       if(status){
-        status.textContent="✅ 저장되었습니다. 포도마을 상점에 바로 반영됐어요.";
+        status.textContent="✅ 저장되었습니다. 포도마을에 바로 반영됐고, 다시 열어도 유지돼요.";
         status.style.color="var(--green)";
         status.style.fontWeight="900";
       }
+
+      ShopStore.notifyUpdated();
       toast("상점 상품을 저장했어요.");
     }
 
@@ -477,17 +454,7 @@ const DEFAULT_TASKS = [
       const wasCompleted=records[todayKey].completed;
       const requiredTasks = tasks.filter(t=>t.required);
       records[todayKey].completed = requiredTasks.length>0 && requiredTasks.every(t=>list.includes(t.id));
-  
-    document.querySelectorAll(".shop-building").forEach(btn=>{
-      btn.addEventListener("click",()=>renderShop(btn.dataset.shop));
-    });
-    $("#closeShop").onclick=()=>$("#shopDialog").close();
-
-    document.querySelectorAll(".nav-btn").forEach(btn=>{
-      btn.onclick=()=>switchView(btn.dataset.view);
-    });
-
-    renderAll();
+      renderAll();
       if(records[todayKey].completed && !wasCompleted){
         celebrate();
         toast("오늘 포도송이를 완성했어요!");
@@ -630,6 +597,15 @@ const DEFAULT_TASKS = [
     });
 
 
+    window.addEventListener("dodam-shop-updated",()=>{
+      shopData=ShopStore.getData();
+      if(momUnlocked) renderMomDashboard();
+      if($("#villageView").classList.contains("active")){
+        const stats=getFarmStats();
+        $("#npcBubble").textContent=`지금 사용할 수 있는 포인트는 ${stats.availablePoints}점이야!`;
+      }
+    });
+
     document.querySelectorAll(".shop-building").forEach(btn=>{
       btn.addEventListener("click",()=>renderShop(btn.dataset.shop));
     });
@@ -657,8 +633,8 @@ const DEFAULT_TASKS = [
     $("#saveShopItems").onclick=saveShopAdminChanges;
     $("#addShopItem").onclick=()=>{
       if(shopAdminDirty) saveShopAdminChanges();
-      shopData[activeAdminShop].items.push({icon:"🎁",name:"새 상품",price:50});
-      saveAll();
+      shopData[activeAdminShop].items.push({icon:"🎁",name:"새 상품",price:50,enabled:true});
+      ShopStore.saveData(shopData);
       shopAdminDirty=false;
       renderShopAdmin();
       toast("새 상품을 추가했어요. 내용을 수정한 뒤 저장해 주세요.");
