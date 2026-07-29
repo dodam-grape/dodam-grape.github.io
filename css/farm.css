@@ -1,0 +1,87 @@
+
+/* v4.1 포도 성장 체계: 7송이 = 1그루, 4그루 = 1농장 */
+#vine .bunch{
+  display:none;
+  position:absolute;
+  z-index:4;
+  font-size:30px;
+  filter:drop-shadow(0 4px 4px rgba(67,25,78,.2));
+  animation:grapePop .35s ease both;
+}
+#vine .bunch.p1{left:31%;top:38%}
+#vine .bunch.p2{left:53%;top:32%}
+#vine .bunch.p3{left:66%;top:45%}
+#vine .bunch.p4{left:39%;top:52%}
+#vine .bunch.p5{left:58%;top:58%}
+#vine .bunch.p6{left:24%;top:57%}
+#vine .bunch.p7{left:48%;top:68%}
+
+@keyframes grapePop{
+  from{opacity:0;transform:scale(.45) translateY(-8px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+
+.farm-growth-guide{
+  max-width:760px;
+  margin:14px auto 0;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 7px 20px rgba(67,43,80,.06);
+}
+.farm-growth-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+  font-weight:950;
+  color:var(--purple);
+}
+.farm-growth-title small{
+  color:var(--muted);
+  font-size:12px;
+}
+.farm-growth-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+.farm-growth-card{
+  padding:12px 8px;
+  border-radius:16px;
+  background:#faf7fc;
+  border:1px solid #eee6f2;
+  text-align:center;
+}
+.farm-growth-card .growth-icon{font-size:26px}
+.farm-growth-card strong{
+  display:block;
+  margin-top:4px;
+  color:var(--purple);
+  font-size:17px;
+}
+.farm-growth-card span{
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+}
+.farm-rule{
+  margin-top:11px;
+  padding:10px 12px;
+  border-radius:14px;
+  background:#f3edf9;
+  color:#5e3b78;
+  font-size:13px;
+  line-height:1.55;
+  font-weight:850;
+}
+
+@media(max-width:520px){
+  #vine .bunch{font-size:25px}
+  .farm-growth-cards{grid-template-columns:1fr 1fr}
+  .farm-growth-card:last-child{grid-column:1/-1}
+}
