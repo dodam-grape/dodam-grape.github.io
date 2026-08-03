@@ -1,0 +1,87 @@
+
+/* v5.0 포도은행 */
+.grape-bank-panel{
+  margin-top:14px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#fff;
+  overflow:hidden;
+}
+.grape-bank-head{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  padding:15px 16px;
+  background:#f7f1fb;
+}
+.grape-bank-head h3{
+  margin:0;
+  color:var(--purple);
+}
+.grape-bank-balance{
+  font-size:13px;
+  font-weight:900;
+  color:var(--muted);
+}
+.grape-bank-balance strong{
+  margin-left:4px;
+  color:var(--purple);
+  font-size:20px;
+}
+.grape-bank-list{
+  max-height:320px;
+  overflow:auto;
+}
+.grape-bank-row{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  gap:10px;
+  align-items:center;
+  padding:11px 15px;
+  border-top:1px solid #f0e9f3;
+}
+.grape-bank-date{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+}
+.grape-bank-reason{
+  font-size:13px;
+  font-weight:850;
+  color:#493453;
+}
+.grape-bank-reason small{
+  display:block;
+  margin-top:2px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:750;
+}
+.grape-bank-amount{
+  font-size:15px;
+  font-weight:950;
+  white-space:nowrap;
+}
+.grape-bank-amount.plus{color:#2c8a56}
+.grape-bank-amount.minus{color:#d25762}
+.grape-bank-empty{
+  padding:24px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:800;
+}
+.bank-protection-note{
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:13px;
+  background:#eff8f1;
+  color:#36714c;
+  font-size:12px;
+  font-weight:850;
+  line-height:1.5;
+}
+@media(max-width:520px){
+  .grape-bank-row{grid-template-columns:66px 1fr auto;padding:10px 11px}
+  .grape-bank-head{align-items:flex-start}
+}
